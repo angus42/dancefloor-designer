@@ -1,0 +1,36 @@
+﻿.list {
+	list-style: none outside none;
+	margin: 10px 0 30px;
+}
+
+.item {
+	padding: 5px 10px;
+	margin: 5px 0;
+	border: 2px solid #444;
+	border-radius: 5px;
+	background-color: #888;
+
+	font-size: 1.1em;
+	font-weight: bold;
+	text-align: center;
+	cursor: move;
+}
+
+.floatleft {
+  float: left;
+}
+
+.container {
+	width: 600px;
+	margin: auto;
+}
+
+body {
+	font-family: Verdana, 'Trebuchet ms', Tahoma;
+    color: #cccccc;
+    background-color: #222;
+}
+
+h2 {
+	text-align: center;
+}
