@@ -70,9 +70,14 @@
         if (!$scope.selected_step)
             return;
         var steps = $scope.data.steps;
+        if (steps.length == 1)
+            return;
         var index = steps.indexOf($scope.selected_step);
-        $scope.selected_step = null;
-        steps.splice(index, 1);        
+        steps.splice(index, 1);
+        if (index >= steps.length)
+            $scope.selected_step = steps[index - 1];
+        else
+            $scope.selected_step = steps[index];
     };
 
     $scope.togglePlayStop = function () {
