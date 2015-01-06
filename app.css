@@ -22,6 +22,9 @@
 
 .floatleft {
   float: left;
+  height: 90%;
+  display: block;
+  overflow-y: auto;
 }
 
 .floatright {

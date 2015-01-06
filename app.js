@@ -7,18 +7,16 @@
         steps: [
             {
                 frame: [
-                    ["#f00", "#0f0", "#00f"],
-                    ["#f80", "#0f8", "#08f"],
-                    ["#ff0", "#0ff", "#f0f"]
+                    [{ v: "#f00" }, { v: "#0f0" }, { v: "#00f" }],
+                    [{ v: "#f80" }, { v: "#0f8" }, { v: "#08f" }],
+                    [{ v: "#ff0" }, { v: "#0ff" }, { v: "#f0f" }]
                 ]
-            },
-            {
-                frame : [
-                    ["#f00", "#0f0", "#00f"],
-                    ["#f80", "#0f8", "#08f"],
-                    ["#ff0", "#0ff", "#f0f"]
-                ]
-            }]
+            }
+        ]
+    };
+
+    $scope.newSequence = function () {
+        alert("Not yet implemented!");
     };
 
     $scope.load = function (element) {
@@ -26,14 +24,18 @@
         reader.onload = function () {
             $scope.$apply(function ($scope) {
                 $scope.data = JSON.parse(reader.result);
-            });
-        };
-        reader.readAsText(element.files[0]);
+        });
+    };
+    reader.readAsText(element.files[0]);
     };
 
     $scope.save = function () {
         var blob = new Blob([JSON.stringify($scope.data)], { type: "text/json;charset=utf-8" });
         saveAs(blob, $scope.data.name + ".dfs");
+    };
+
+    $scope.exportToC = function () {
+        alert("Not yet implemented!");
     };
 
     $scope.selectStep = function (step) {
@@ -43,7 +45,7 @@
     $scope.setColor = function (element, row, index) {
         if (!$scope.selected_color)
             return;
-        row[index] = angular.copy($scope.selected_color);
+        row[index].v = angular.copy($scope.selected_color);
     }
 
     $scope.addStep = function () {
@@ -51,11 +53,10 @@
         var newStep = angular.copy($scope.data.steps[0]);
         for (y = 0; y < newStep.frame.length; y++) {
             for (x = 0; x < newStep.frame[y].length; x++) {
-                newStep.frame[y][x] = "#000";
+                newStep.frame[y][x].v = "#000";
             }
         }
         steps.push(newStep);
-        $scope.data.steps = steps;
     }
 
     $scope.copyStep = function () {
@@ -63,6 +64,19 @@
             return;
         var steps = $scope.data.steps;
         steps.push(angular.copy($scope.selected_step));
-        $scope.data.steps = steps;
     }
+
+    $scope.removeStep = function () {
+        if (!$scope.selected_step)
+            return;
+        var steps = $scope.data.steps;
+        var index = steps.indexOf($scope.selected_step);
+        $scope.selected_step = null;
+        steps.splice(index, 1);        
+    };
+
+    $scope.togglePlayStop = function () {
+        alert("Not yet implemented!");
+    };
+
 });
