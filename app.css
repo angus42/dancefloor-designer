@@ -24,6 +24,10 @@
   float: left;
 }
 
+.floatright {
+  float: right;
+}
+
 .container {
 	width: 600px;
 	margin: auto;

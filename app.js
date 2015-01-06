@@ -1,6 +1,7 @@
-﻿angular.module('myApp', ['ui.sortable'])
+﻿angular.module('myApp', ['ui.sortable', 'angularSpectrumColorpicker'])
 .controller('Ctrl', function ($scope) {
     $scope.selected_step = null;
+    $scope.selected_color = null;
     $scope.data = {
         name: "Unnamed",
         steps: [
@@ -39,11 +40,27 @@
         $scope.selected_step = step;
     }
 
-    $scope.selectColor = function (element) {
-        element.color = "#f00000";
+    $scope.setColor = function (element, row, index) {
+        if (!$scope.selected_color)
+            return;
+        row[index] = angular.copy($scope.selected_color);
     }
 
-    $scope.newStep = function () {
+    $scope.addStep = function () {
+        var steps = $scope.data.steps;
+        var newStep = angular.copy($scope.data.steps[0]);
+        for (y = 0; y < newStep.frame.length; y++) {
+            for (x = 0; x < newStep.frame[y].length; x++) {
+                newStep.frame[y][x] = "#000";
+            }
+        }
+        steps.push(newStep);
+        $scope.data.steps = steps;
+    }
+
+    $scope.copyStep = function () {
+        if (!$scope.selected_step)
+            return;
         var steps = $scope.data.steps;
         steps.push(angular.copy($scope.selected_step));
         $scope.data.steps = steps;

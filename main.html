@@ -5,16 +5,20 @@
     <script src="Scripts/jquery-ui-1.11.2.min.js"></script>
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/sortable.min.js"></script>
+    <script src="Scripts/spectrum.js"></script>
+    <script src="Scripts/angular-spectrum-colorpicker.min.js"></script>
     <script src="Scripts/FileSaver.min.js"></script>
 
     <script src="app.js"></script>
     <link href="app.css" rel="stylesheet" />
+    <link href="Scripts/spectrum.css" rel="stylesheet" />
 </head>
 <body>
     <div ng-app="myApp" ng-controller="Ctrl" class="container">
         <h2>Dance Floor Sequencer</h2>
         <div>
-            <button ng-click="newStep()">+</button>
+            <button ng-click="addStep()">Add</button>
+            <button ng-click="copyStep()">Copy</button>
             <input style="height: 0px;width:0px; overflow:hidden;" id="load" type="file" onchange="angular.element(this).scope().load(this)"  />
             <button onclick="document.getElementById('load').click()">Load</button>
             <button ng-click="save()">Save</button>
@@ -30,15 +34,16 @@
                     <table border=" 0" cellpadding="0" cellspacing="0">
                     <tbody>
                         <tr ng-repeat="row in step.frame" style="height:1em">
-                            <td ng-repeat="color in row" ng-click="selectColor(this)" ng-style="{'background-color': color}" style="width: 1em;border-style: solid;border-width: 2px;border-color: black" />
+                            <td ng-repeat="color in row" ng-click="setColor(this, row, $index)" ng-style="{'background-color': color}" style="width: 1em;border-style: solid;border-width: 2px;border-color: black" />
                         </tr>
                     </tbody>
                     </table>
                 </li>
             </ul>
         </div>
-
-    </div>
-
+        <div class="floatright">
+            <spectrum-colorpicker format="'hex'" ng-model="selected_color"></spectrum-colorpicker>
+            {{selected_color}}
+        </div>
 </body>
 </html>
