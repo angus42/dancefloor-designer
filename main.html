@@ -30,7 +30,7 @@
                     <table border=" 0" cellpadding="0" cellspacing="0">
                     <tbody>
                         <tr ng-repeat="row in step.frame" style="height:1em">
-                            <td ng-repeat="color in row" ng-style="{'background-color': color}" style="width: 1em;border-style: solid;border-width: 2px;border-color: black" />
+                            <td ng-repeat="color in row" ng-click="selectColor(this)" ng-style="{'background-color': color}" style="width: 1em;border-style: solid;border-width: 2px;border-color: black" />
                         </tr>
                     </tbody>
                     </table>

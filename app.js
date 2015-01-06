@@ -39,6 +39,10 @@
         $scope.selected_step = step;
     }
 
+    $scope.selectColor = function (element) {
+        element.color = "#f00000";
+    }
+
     $scope.newStep = function () {
         var steps = $scope.data.steps;
         steps.push(angular.copy($scope.selected_step));
