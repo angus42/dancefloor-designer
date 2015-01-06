@@ -1,5 +1,6 @@
 ﻿angular.module('myApp', ['ui.sortable', 'angularSpectrumColorpicker'])
-.controller('Ctrl', function ($scope) {
+.controller('Ctrl', ['$scope', '$interval',
+      function($scope, $interval) {
     $scope.selected_step = null;
     $scope.selected_color = null;
     $scope.data = {
@@ -14,6 +15,8 @@
             }
         ]
     };
+
+    var animationToken;
 
     $scope.newSequence = function (width, height) {
         var firstFrame = new Array();
@@ -97,7 +100,21 @@
     };
 
     $scope.togglePlayStop = function () {
-        alert("Not yet implemented!");
+        if (angular.isDefined(animationToken)) {
+            $interval.cancel(animationToken);
+            animationToken = undefined;
+        }
+        else {
+            var delay = $("#animationSpeedSlider").slider("value");
+            animationToken = $interval(function () {
+                var steps = $scope.data.steps;
+                var index = steps.indexOf($scope.selected_step);
+                index++;
+                if (index >= steps.length)
+                    index = 0;
+                $scope.selected_step = steps[index];
+            }, delay );
+        }
     };
 
-});
+}]);

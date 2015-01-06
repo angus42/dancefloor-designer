@@ -18,6 +18,11 @@
         $(function () {
             $("#widthSpinner").spinner();
             $("#heightSpinner").spinner();
+            $("#animationSpeedSlider").slider({
+                min: 5,
+                max: 2000,
+                value: 500,
+            });
             $("#newSequenceDialog").dialog({
                 autoOpen: false,
                 hide: "puff",
@@ -50,6 +55,8 @@
                     <button ng-click="copyStep()">Copy</button>
                     <button ng-click="removeStep()">Remove</button>
                     <button ng-click="togglePlayStop()">Play/Stop</button>
+                    <p />
+                    <div id="animationSpeedSlider"></div>
                 </div>
                 <ul ui-sortable ng-model="data.steps" class="list">
                     <li ng-repeat="step in data.steps" class="item" ng-class="{'selected': step === selected_step}" ng-click="selectStep(step)">
