@@ -15,8 +15,24 @@
         ]
     };
 
-    $scope.newSequence = function () {
-        alert("Not yet implemented!");
+    $scope.newSequence = function (width, height) {
+        var firstFrame = new Array();
+        for (y = 0; y < height; y++) {
+            var row = new Array();
+            firstFrame.push(row);
+            for (x = 0; x < width; x++) {
+                row.push({ v: "#000" });
+            }
+        }
+        $scope.$apply(function ($scope) {            
+            $scope.selected_step = null;
+            $scope.data.name = "Unnamed";
+            $scope.data.steps = [
+                {
+                    frame: firstFrame
+                }
+            ];
+        });
     };
 
     $scope.load = function (element) {
