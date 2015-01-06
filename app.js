@@ -99,21 +99,34 @@
             $scope.selected_step = steps[index];
     };
 
-    $scope.togglePlayStop = function () {
+    $scope.stopAnimation = function () {
         if (angular.isDefined(animationToken)) {
             $interval.cancel(animationToken);
             animationToken = undefined;
         }
+    }
+
+    $scope.playAnimation = function () {
+        if (angular.isDefined(animationToken)) {
+            $scope.stopAnimation()
+        }
+        var delay = $("#animationSpeedSlider").slider("value");
+        animationToken = $interval(function () {
+            var steps = $scope.data.steps;
+            var index = steps.indexOf($scope.selected_step);
+            index++;
+            if (index >= steps.length)
+                index = 0;
+            $scope.selected_step = steps[index];
+        }, delay);
+    }
+
+    $scope.togglePlayStop = function () {
+        if (angular.isDefined(animationToken)) {
+            $scope.stopAnimation()
+        }
         else {
-            var delay = $("#animationSpeedSlider").slider("value");
-            animationToken = $interval(function () {
-                var steps = $scope.data.steps;
-                var index = steps.indexOf($scope.selected_step);
-                index++;
-                if (index >= steps.length)
-                    index = 0;
-                $scope.selected_step = steps[index];
-            }, delay );
+            $scope.playAnimation();
         }
     };
 
