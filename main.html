@@ -43,6 +43,7 @@
                     }
                 },
             });
+            initColorPicker("#colorpicker");
     });
     </script>
 
@@ -95,9 +96,7 @@
             </div>
 
             <div class="color_palette">
-                <spectrum-colorpicker ng-model="selected_color"
-                                      format="'hex'"
-                                      options="{flat: true, showPaletteOnly: true, togglePaletteOnly: true, showButtons: false, showInput: true, preferredFormat: 'rgb', palette: [['white', 'black']], color: 'white'}" />
+                <spectrum-colorpicker id="colorpicker" ng-model="selected_color" format="'hex'" />
             </div>
         </div>
 
