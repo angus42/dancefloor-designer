@@ -2,7 +2,7 @@
 .controller('Ctrl', ['$scope', '$interval',
       function($scope, $interval) {
     $scope.selected_step = null;
-    $scope.selected_color = null;
+    $scope.selected_color = "#fff";
     $scope.data = {
         name: "Unnamed",
         steps: [

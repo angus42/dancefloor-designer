@@ -95,8 +95,9 @@
             </div>
 
             <div class="color_palette">
-                <spectrum-colorpicker format="'hex'" ng-model="selected_color"></spectrum-colorpicker>
-                {{selected_color}}
+                <spectrum-colorpicker ng-model="selected_color"
+                                      format="'hex'"
+                                      options="{flat: true, showPaletteOnly: true, togglePaletteOnly: true, showButtons: false, showInput: true, preferredFormat: 'rgb', palette: [['white', 'black']], color: 'white'}" />
             </div>
         </div>
 
