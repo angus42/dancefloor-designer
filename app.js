@@ -43,6 +43,7 @@
         reader.onload = function () {
             $scope.$apply(function ($scope) {
                 $scope.data = JSON.parse(reader.result);
+                $scope.selected_step = null;
             });
 
             var palette = new Array();
