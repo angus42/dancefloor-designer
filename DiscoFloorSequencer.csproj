@@ -94,7 +94,6 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="main.html" />
     <Content Include="Scripts\angular-mocks.js" />
-    <Content Include="Scripts\angular-spectrum-colorpicker.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\FileSaver.min.js" />

@@ -1,4 +1,4 @@
-﻿angular.module('myApp', ['ui.sortable', 'angularSpectrumColorpicker'])
+﻿angular.module('myApp', ['ui.sortable'])
 .controller('Ctrl', ['$scope', '$interval',
       function($scope, $interval) {
     $scope.selected_step = null;
@@ -45,19 +45,21 @@
                 $scope.data = JSON.parse(reader.result);
             });
 
-            var selectionPalette = new Array();
+            var palette = new Array();
+            palette.push("#000");
+            palette.push("#fff");
             for (i = 0; i < $scope.data.steps.length; i++) {
                 var step = $scope.data.steps[i];
                 for (y = 0; y < step.frame.length; y++) {
                     for (x = 0; x < step.frame[y].length; x++) {
                         var color = step.frame[y][x].v;
-                        if (selectionPalette.indexOf(color) < 0)
-                            selectionPalette.push(color);
+                        if (palette.indexOf(color) < 0)
+                            palette.push(color);
                     }
                 }
             }
 
-            initColorPicker("#colorpicker", selectionPalette);
+            $("#colorpicker").spectrum("option", "palette", palette);
         };
         reader.readAsText(element.files[0]);
     };
@@ -181,18 +183,4 @@ function hexToRgb(hex) {
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16)
     } : null;
-}
-
-function initColorPicker(selector, selectionPalette) {
-    $(selector).spectrum({
-        flat: true,
-        showPaletteOnly: true,
-        togglePaletteOnly: true,
-        showButtons: false,
-        showInput: true,
-        preferredFormat: "rgb",
-        palette: [["white", "black"]],
-        color: "white",
-        selectionPalette: selectionPalette
-    });
 }

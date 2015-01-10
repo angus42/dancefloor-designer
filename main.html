@@ -6,7 +6,6 @@
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/sortable.min.js"></script>
     <script src="Scripts/spectrum.js"></script>
-    <script src="Scripts/angular-spectrum-colorpicker.min.js"></script>
     <script src="Scripts/FileSaver.min.js"></script>
 
     <script src="app.js"></script>
@@ -43,7 +42,22 @@
                     }
                 },
             });
-            initColorPicker("#colorpicker");
+            $("#colorpicker").spectrum({
+                flat: true,
+                showPaletteOnly: true,
+                togglePaletteOnly: true,
+                showButtons: false,
+                showInput: true,
+                preferredFormat: "rgb",
+                palette: ["#fff", "#000"],
+                color: "#fff",
+                change: function (color) {
+                    $("#app").scope().selected_color = color.toHexString();
+                },
+                move: function (color) {
+                    $("#app").scope().selected_color = color.toHexString();
+                }
+            });
     });
     </script>
 
@@ -96,7 +110,7 @@
             </div>
 
             <div class="color_palette">
-                <spectrum-colorpicker id="colorpicker" ng-model="selected_color" format="'hex'" />
+                <input type="text" id="colorpicker" />
             </div>
         </div>
 
