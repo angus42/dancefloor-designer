@@ -72,7 +72,9 @@
 
     $scope.exportToC = function () {
         var firstFrame = $scope.data.steps[0].frame;
-        var content = "const byte " + $scope.data.name + "[][" + firstFrame.length * firstFrame[0].length  + "][3] = {\r\n";
+
+        var content = "#include \"Config.h\"\r\n\r\n";
+        content += "static sequence_t " + $scope.data.name + " = {\r\n";
         for (i = 0; i < $scope.data.steps.length; i++)
         {
             if (i > 0)
@@ -91,7 +93,7 @@
             }
             content += "}";
         }
-        content += "\r\n};";
+        content += "\r\n};\r\n";
 
         var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
         saveAs(blob, $scope.data.name + ".h");
