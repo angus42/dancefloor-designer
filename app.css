@@ -3,6 +3,8 @@
 	margin: 10px;
     padding: 0;
     border-width: 0;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .item {
@@ -36,7 +38,6 @@
 .step_role {
   width: auto;
   height: 90%;
-  overflow-y: auto;
   padding-right: 1.5em;
   /* border: 1px solid red; */
   /* direction: rtl; */
