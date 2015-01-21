@@ -72,35 +72,6 @@
         saveAs(blob, $scope.data.name + ".dfs");
     };
 
-    $scope.exportToC = function () {
-        var firstFrame = $scope.data.steps[0].frame;
-
-        var content = "#include \"Config.h\"\r\n\r\n";
-        content += "static sequence_t " + $scope.data.name + " = {\r\n";
-        for (i = 0; i < $scope.data.steps.length; i++)
-        {
-            if (i > 0)
-                content += ",\r\n";
-            content += "{";
-            var step = $scope.data.steps[i];
-            for (y = 0; y < step.frame.length; y++) {
-                if (y > 0)
-                    content += ",\r\n";
-                for (x = 0; x < step.frame[y].length; x++) {
-                    if (x > 0)
-                        content += ",";
-                    var rgb = hexToRgb(step.frame[y][x].v);
-                    content += "{ " + rgb.r + ", " + rgb.g + ", " + rgb.b + " }";
-                }
-            }
-            content += "}";
-        }
-        content += "\r\n};\r\n";
-
-        var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-        saveAs(blob, $scope.data.name + ".h");
-    };
-
     $scope.selectStep = function (step) {
         $scope.selected_step = step;
     }
